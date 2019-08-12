@@ -1,2 +1,2 @@
 # bimvrVueapp
-后台程序
+移动app程序
