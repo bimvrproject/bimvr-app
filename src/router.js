@@ -25,6 +25,30 @@ export default new Router({
       component: () => import("./views/user/ForgetPassword.vue")
     },
     {
+      path: "/recharge",
+      name: "recharge",
+      meta: { requireAuth: true },
+      component: () => import("./views/alipay/recharge.vue")
+    },
+    {
+      path: "/download",
+      name: "download",
+      meta: { requireAuth: true },
+      component: () => import("./views/download/download.vue")
+    },
+    {
+      path: "/openapp",
+      name: "openapp",
+      meta: { requireAuth: true },
+      component: () => import("./views/app/openapp.vue")
+    },
+    {
+      path: "/personal",
+      name: "personal",
+      meta: { requireAuth: true },
+      component: () => import("./views/personal/personal.vue")
+    },
+    {
       path: "/about",
       name: "about",
       meta: { requireAuth: true },

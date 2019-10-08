@@ -3,11 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="path/to/swiper/dist/css/swiper.css"/>
+    <script type="text/javascript" src="path/to/swiper.js"></script>
+    <script type="text/javascript" src="path/to/vue.min.js"></script>
+    <script type="text/javascript" src="path/to/dist/vue-awesome-swiper.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+      Vue.use(window.VueAwesomeSwiper)
+    </script>
     <title>bimvr-vue</title>
 
-    <script type="text/javascript" src="http://39.96.59.142:8080/project/js/mui.min.js"></script>
+    <script type="text/javascript" src="http://36.112.65.110:8080/project/js/mui.min.js"></script>
 
   </head>
   <body>
@@ -22,6 +29,6 @@
         keyEventBind: {
             backbutton: true  //关闭back按键监听
         }
-    });    
+    });
   </script>
 </html>

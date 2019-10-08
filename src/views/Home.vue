@@ -1,7 +1,10 @@
 <template>
   <div style="position: relative;">
     <!-- header开始 -->
-    <div id="header_page_bg" style="position: fixed;  z-index: 10; top: 0; height: 44px; width: 100%; ">
+    <div
+      id="header_page_bg"
+      style="position: fixed;  z-index: 10; top: 0; height: 44px; width: 100%; "
+    >
       <a-row>
         <a-col :span="3" style="margin-top: 14px;">
           <a
@@ -66,26 +69,12 @@
     </div>
     <!-- header结束 -->
 
-    <!-- 版本检测开始 -->
-    <div>
-      <div id="popContainer" :style="checkVersion" style="position: fixed; z-index: 999;">
-          <!-- 这个是遮罩-->
-      </div>
-      <div :style="checkVersion_update" style="position: fixed; z-index: 1000;">
-        <div style="width: 200px;height: 100px; background-color: #dddddd;border: 2px solid white;opacity: 0.9;">
-          <h5 style="font-size: 20px; margin-top: 20px;">检测到新版本!</h5>
-          <a-button style="width: 70px; height: 23px; border-radius: 20px;" @click="closeCheck">取消</a-button>
-          &nbsp;
-          <a-button type="primary" style="width: 70px;height: 23px;border-radius: 20px;" @click="update" >更新</a-button>
-        </div>
-      </div>
-    </div>
-    <!-- 版本检测结束 -->
-    
+
 
     <!-- content开始 -->
-    <div style="margin-top: 44px; margin-left: 10px; margin-right: 10px; background-color: #ffffff; position: relative; z-index: 5;">
-
+    <div
+      style="margin-top: 44px; margin-left: 10px; margin-right: 10px; background-color: #ffffff; position: relative; z-index: 5;"
+    >
       <!--我的项目  标题-->
       <div>
         <a-row>
@@ -109,7 +98,9 @@
         :key="index"
         style="margin-top: 3%; margin-left:20px; margin-right: 20px"
       >
-        <div v-on:click="jumpModel(companyId, item.projectId, item.projectName)">
+        <div
+          v-on:click="jumpModel(companyId, item.projectId, item.projectName)"
+        >
           <div style="border: 1px solid; border-color: #DDDDDD">
             <a-row>
               <div style="float: left; display: inline-table;">
@@ -189,14 +180,12 @@
     </div>
     <!-- content结束 -->
 
-    
-
     <!-- footer开始 -->
     <div
       style="position: fixed; z-index: 8; bottom: 0; width: 100%; height: 49px; background-color: #FAFAFA;"
     >
       <a-row>
-        <a-col :span="12" v-on: click="openHome()">
+        <a-col :span="6" v-on: click="openHome()">
           <div v-on:click="openHome()">
             <img
               src="../assets/img/home_on.png"
@@ -206,7 +195,17 @@
 
           <div><a style="color: #2180ED; font-size: 11px">首页</a></div>
         </a-col>
-        <a-col :span="12">
+        <a-col :span="6" v-on: click="openPay()">
+          <div v-on:click="openPay()">
+            <img
+              src="../assets/img/alipay/612531.jpg"
+              style="width: 22px; height: 22px; margin-top: 5px;"
+            />
+          </div>
+
+          <div><a style="color: #666666; font-size: 11px">充值</a></div>
+        </a-col>
+        <a-col :span="6">
           <div v-on:click="openCommunity()">
             <img
               src="../assets/img/community_off.png"
@@ -215,6 +214,12 @@
           </div>
 
           <div><a style="color: #666666; font-size: 11px">社区</a></div>
+        </a-col>
+        <a-col :span="6">
+          <div v-on:click="openPersonal()">
+            <a-icon  style="width: 22px; height: 22px; margin-top: 5px;" type="user" />
+          </div>
+          <div><a style="color: #666666; font-size: 11px">个人</a></div>
         </a-col>
       </a-row>
     </div>
@@ -235,18 +240,13 @@ export default {
       url: "",
       projectList: [],
       companyId: "",
-      version: global.version,
-      checkVersion: "display:none",
-      checkVersion_update: "display:none",
-      versionc: "",
-      updateHeight: "",
-      updateWidth: ""
     };
   },
   mounted() {
     this.$http.post(api.GetProject).then(res => this.homeData(res));
     this.updateHeight = ";margin-top: 45%;";
-    this.updateWidth = ";margin-left:" + (document.body.scrollWidth - 200)/2 + "px;";
+    this.updateWidth =
+      ";margin-left:" + (document.body.scrollWidth - 200) / 2 + "px;";
   },
   methods: {
     homeData(res) {
@@ -254,23 +254,6 @@ export default {
         this.username = res.data.username;
         this.projectList = res.data.projectList;
         this.companyId = res.data.companyId;
-      }
-      this.postCheckVersion();
-    },
-    postCheckVersion() {
-      this.$http.post(api.CheckVersion).then(res => this.versionData(res));
-    },
-    versionData(res) {
-      this.versionc = res.data.version;
-      this.getVersion();
-    },
-    getVersion() {
-      if (this.versionc != this.version) {
-        this.checkVersion = "";
-        this.checkVersion_update = this.updateWidth + this.updateHeight;
-      } else {
-        this.checkVersion = "display:none";
-        this.checkVersion_update = "display:none";
       }
     },
     showDrawer() {
@@ -295,7 +278,15 @@ export default {
       this.$router.push("/search");
     },
     jumpModel(companyId, projectId, projectName) {
-      this.$router.push("/project?" + "companyId=" + companyId + "&projectId=" + projectId + "&projectName=" + projectName);
+      this.$router.push(
+        "/project?" +
+          "companyId=" +
+          companyId +
+          "&projectId=" +
+          projectId +
+          "&projectName=" +
+          projectName
+      );
     },
     //关闭检查更新
     closeCheck() {
@@ -306,7 +297,7 @@ export default {
     update() {
       // http://www.jh-bim.com/public/apk/download/download.html
       // window.open("http://39.96.59.142:8080/project/bimvr.apk");
-      window.location = "http://39.96.59.142:8080/project/bimvr.apk";
+      window.location = "http://36.112.65.110:8080/project/bimvr.apk";
     },
     dateFormat: function(time) {
       var date = new Date(time);
@@ -314,7 +305,10 @@ export default {
       /* 在日期格式中，月份是从0开始的，因此要加0的123
        * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
        * */
-      var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+      var month =
+        date.getMonth() + 1 < 10
+          ? "0" + (date.getMonth() + 1)
+          : date.getMonth() + 1;
       var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
       // var hours =
       //   date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
@@ -336,9 +330,16 @@ export default {
     openHome() {
       this.$router.push("/home");
     },
+    openPay() {
+      this.$router.push("/recharge");
+    },
     openCommunity() {
       this.$router.push("/community");
+    },
+    openPersonal() {
+      this.$router.push("/personal");
     }
+
   }
 };
 
@@ -346,17 +347,21 @@ export default {
 // 处理逻辑：1秒内，连续两次按返回键，则退出应用；
 var first = null;
 mui.back = function() {
-    //首次按键，提示‘再按一次退出应用’
-    if (!first) {
-        first = new Date().getTime();//记录第一次按下回退键的时间
-        mui.toast('再按一次退出应用');//给出提示
-        setTimeout(function() {//1s中后清除
-            first = null;
-        }, 1000);
-    } else {
-        if (new Date().getTime() - first < 1000) {//如果两次按下的时间小于1s，
-            plus.runtime.quit();//那么就退出app
-} } };
+  //首次按键，提示‘再按一次退出应用’
+  if (!first) {
+    first = new Date().getTime(); //记录第一次按下回退键的时间
+    mui.toast("再按一次退出应用"); //给出提示
+    setTimeout(function() {
+      //1s中后清除
+      first = null;
+    }, 1000);
+  } else {
+    if (new Date().getTime() - first < 1000) {
+      //如果两次按下的时间小于1s，
+      plus.runtime.quit(); //那么就退出app
+    }
+  }
+};
 </script>
 
 <style>

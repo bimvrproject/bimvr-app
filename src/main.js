@@ -6,6 +6,10 @@ import router from "./router";
 import store from "./store";
 import axios from "axios";
 import setAxios from "@/utils/setAxios";
+import "./assets/js/swiper.js";
+import "./assets/css/swiper.css";
+import "lib-flexible";
+
 
 setAxios(); //执行拦截器方法，将每一个请求头装入token令牌
 

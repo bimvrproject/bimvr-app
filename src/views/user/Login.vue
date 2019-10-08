@@ -1,5 +1,35 @@
 <template>
-  <a-layout id="login_page_bg">
+  <a-layout id="_page_bg" style="position: relative;">
+    <!-- 版本检测开始 -->
+    <div>
+      <div
+              id="popContainer"
+              :style="checkVersion"
+              style="position: fixed; z-index: 999;"
+      >
+        <!-- 这个是遮罩-->
+      </div>
+      <div :style="checkVersion_update" style="position: fixed; z-index: 1000;">
+        <div
+                style="width: 200px;height: 100px; background-color: #dddddd;border: 2px solid white;opacity: 0.9;"
+        >
+          <h5 style="font-size: 20px; margin-top: 20px;">检测到新版本!</h5>
+          <a-button
+                  style="width: 70px; height: 23px; border-radius: 20px;"
+                  @click="closeCheck"
+          >取消</a-button
+          >
+          &nbsp;
+          <a-button
+                  type="primary"
+                  style="width: 70px;height: 23px;border-radius: 20px;"
+                  @click="update"
+          >更新</a-button
+          >
+        </div>
+      </div>
+    </div>
+    <!-- 版本检测结束 -->
     <div style="margin: 0 auto; width: 20%; margin-top: 12.14%;">
       <img
         src="../../assets/logo.png"
@@ -17,7 +47,7 @@
     <div
       style="margin-top: 4.94%; margin-bottom: 1.49%;"
       v-show="show"
-      id="login_message"
+      id="_message"
     >
       <a
         style="color: #E82251; font-size: 12px; font-family: PingFangSC-Medium;"
@@ -110,13 +140,14 @@
         </a-form-item>
       </a-form>
     </a-layout-content>
+
   </a-layout>
 </template>
 
 <script>
 import api from "@/api/api.js";
 import qs from "qs";
-
+import global from "@/api/global";
 export default {
   data() {
     return {
@@ -129,10 +160,46 @@ export default {
         // login type: 0 email, 1 username, 2 telephone
         loginType: 0,
         smsSendBtn: false
-      }
+      },
+      version: global.version,
+      checkVersion: "display:none",
+      checkVersion_update: "display:none",
+      versionc: "",
+      updateHeight: "",
+      updateWidth: ""
     };
   },
+  mounted() {
+    this.$http.post(api.CheckVersion).then(res => this.versionData(res));
+    this.updateHeight = ";margin-top: 45%;";
+    this.updateWidth =
+            ";margin-left:" + (document.body.scrollWidth - 200) / 2 + "px;";
+  },
   methods: {
+    versionData(res) {
+      this.versionc = res.data.version;
+      this.getVersion();
+    },
+    getVersion() {
+      if (this.versionc != this.version) {
+        this.checkVersion = "";
+        this.checkVersion_update = this.updateWidth + this.updateHeight;
+      } else {
+        this.checkVersion = "display:none";
+        this.checkVersion_update = "display:none";
+      }
+    },
+    //关闭检查更新
+    closeCheck() {
+      this.checkVersion = "display:none";
+      this.checkVersion_update = "display:none";
+    },
+    //检查更新
+    update() {
+      // http://www.jh-bim.com/public/apk/download/download.html
+      // window.open("http://39.96.59.142:8080/project/bimvr.apk");
+      window.location = "http://36.112.65.110:8080/project/bimvr.apk";
+    },
     handleUsernameOrEmail(rule, value, callback) {
       const { state } = this;
       const regex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;

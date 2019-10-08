@@ -1,4 +1,17 @@
 module.exports = {
+  css: {
+    loaderOptions: {
+      css: {},
+      postcss: {
+        plugins: [
+          require('postcss-px2rem')({
+            remUnit: 75
+          })
+        ]
+      }
+    }
+  },
+
   publicPath: "./",
   // 将部署应用程序的基本URL
   // 默认情况下，Vue CLI假设您的应用程序将部署在域的根目录下。
@@ -41,23 +54,18 @@ module.exports = {
 
   devServer: {
     port: 80, // 端口号
-    // host: "127.0.0.1",
     https: false, // https:{type:Boolean}
     open: false, //配置自动启动浏览器
-    // proxy: 'http://127.0.0.1:6666' // 配置跨域处理,只有一个代理
+    // proxy: 'http://36.112.65.110:9090' // 配置跨域处理,只有一个代理
     proxy: {
       "/v1.0": {
-        target: "http://127.0.0.1:6666",
+        target: "http://36.112.65.110:9090",
         ws: true,
         changeOrigin: true,
         pathRewriter: {
           "^/v1.0": ""
         }
       }
-      // ,
-      //       '/foo': {
-      //           target: '<other_url>'
-      //       }
     } // 配置多个代理
   }
 };
