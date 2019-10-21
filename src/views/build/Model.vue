@@ -56,7 +56,7 @@ export default {
 					this.resUrl = res.data.url
         })
         .catch(err => {
-					
+
         })
         .finally(() => {
 
