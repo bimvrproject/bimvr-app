@@ -261,7 +261,7 @@ export default {
       this.$http
         .post(
           api.Login,
-          qs.stringify({ username: "guest", password: "123456" })
+          qs.stringify({ username: "18338644205", password: "123456" })
         )
         .then(res => this.loginSuccess(res))
         .catch(err => this.requestFailed(err))

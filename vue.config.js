@@ -60,6 +60,7 @@ module.exports = {
     proxy: {
       "/v1.0": {
         target: "http://36.112.65.110:9090",
+        // target: "http://127.0.0.1:9090",
         ws: true,
         changeOrigin: true,
         pathRewriter: {
