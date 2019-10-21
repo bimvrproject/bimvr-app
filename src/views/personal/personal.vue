@@ -37,7 +37,7 @@
         >
             <a-list-item slot="renderItem" slot-scope="item, index">
                 <a-list-item-meta >
-                    <a slot="title" @click="title()">{{item.title}}</a>
+                    <a slot="title" @click="title(index)" >{{item.title}}</a>
                 </a-list-item-meta>
             </a-list-item>
         </a-list>
@@ -49,15 +49,19 @@
     const data = [
         {
             title: '我的资料',
+            index:0,
         },
         {
             title: '我的下载',
+            index:1,
         },
         {
             title: '我的钱包',
+            index:2,
         },
         {
             title: '设置',
+            index:3,
         },
     ]
     export default {
@@ -68,11 +72,36 @@
             }
         },
         methods:{
-            title(){
-                this.$router.push("/download");
+            title(index){
+                switch (index) {
+                    case 0:
+                        this.openNotification();
+                        break;
+                    case 1:
+                        this.$router.push("/download");
+                        break;
+                    case 2:
+                        this.openNotification();
+                        break;
+                    case 3:
+                        this.openNotification();
+                        break;
+                    default:
+                        this.openNotification();
+                }
             },
             returnHome() {
                 this.$router.push("/home");
+            },
+            openNotification() {
+                this.$notification.open({
+                    message: '警告',
+                    description:
+                        '该功能暂未开放',
+                    onClick: () => {
+                        console.log('Notification Clicked!');
+                    },
+                });
             },
         }
     }
