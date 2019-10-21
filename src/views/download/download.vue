@@ -16,6 +16,7 @@
             <a-col :span="18">
                 <h4
                         style="color: #FFFFFF; font-size: 18px; font-family: PingFangSC-Medium; margin-top: 9px;"
+                        @click="openapp()"
                 >
                    我的下载
                 </h4>
@@ -25,7 +26,7 @@
     </div>
     <!-- header结束 -->
 <!--下载中心-->
-        <div style="width: 100%" @click="openapp()">
+        <div style="width: 100%" >
             <a-list
                     itemLayout="horizontal"
                     :dataSource="data"
@@ -65,7 +66,7 @@
             },
             openapp(){
                 let mythis=this;
-                this.$http.get(api.AllApp).then(function (response) {
+                this.$http.get(api.SelectApp).then(function (response) {
                     mythis.data=response.data;
                     console.log(mythis.data)
                 }).catch(function (error) {
