@@ -4,7 +4,7 @@ module.exports = {
       css: {},
       postcss: {
         plugins: [
-          require('postcss-px2rem')({
+          require("postcss-px2rem")({
             remUnit: 75
           })
         ]
@@ -58,13 +58,13 @@ module.exports = {
     open: false, //配置自动启动浏览器
     // proxy: 'http://36.112.65.110:9090' // 配置跨域处理,只有一个代理
     proxy: {
-      "/v1.0": {
+      "/v1.0.1": {
         target: "http://36.112.65.110:9090",
         // target: "http://127.0.0.1:9090",
         ws: true,
         changeOrigin: true,
         pathRewriter: {
-          "^/v1.0": ""
+          "^/v1.0.1": ""
         }
       }
     } // 配置多个代理
