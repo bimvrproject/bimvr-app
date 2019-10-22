@@ -3,28 +3,28 @@
     <!-- 版本检测开始 -->
     <div>
       <div
-              id="popContainer"
-              :style="checkVersion"
-              style="position: fixed; z-index: 999;"
+        id="popContainer"
+        :style="checkVersion"
+        style="position: fixed; z-index: 999;"
       >
         <!-- 这个是遮罩-->
       </div>
       <div :style="checkVersion_update" style="position: fixed; z-index: 1000;">
         <div
-                style="width: 200px;height: 100px; background-color: #dddddd;border: 2px solid white;opacity: 0.9;"
+          style="width: 200px;height: 100px; background-color: #dddddd;border: 2px solid white;opacity: 0.9;"
         >
           <h5 style="font-size: 20px; margin-top: 20px;">检测到新版本!</h5>
           <a-button
-                  style="width: 70px; height: 23px; border-radius: 20px;"
-                  @click="closeCheck"
-          >取消</a-button
+            style="width: 70px; height: 23px; border-radius: 20px;"
+            @click="closeCheck"
+            >取消</a-button
           >
           &nbsp;
           <a-button
-                  type="primary"
-                  style="width: 70px;height: 23px;border-radius: 20px;"
-                  @click="update"
-          >更新</a-button
+            type="primary"
+            style="width: 70px;height: 23px;border-radius: 20px;"
+            @click="update"
+            >更新</a-button
           >
         </div>
       </div>
@@ -140,7 +140,6 @@
         </a-form-item>
       </a-form>
     </a-layout-content>
-
   </a-layout>
 </template>
 
@@ -173,7 +172,7 @@ export default {
     this.$http.post(api.CheckVersion).then(res => this.versionData(res));
     this.updateHeight = ";margin-top: 45%;";
     this.updateWidth =
-            ";margin-left:" + (document.body.scrollWidth - 200) / 2 + "px;";
+      ";margin-left:" + (document.body.scrollWidth - 200) / 2 + "px;";
   },
   methods: {
     versionData(res) {
