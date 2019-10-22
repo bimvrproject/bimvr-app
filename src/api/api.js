@@ -13,7 +13,7 @@ const api = {
   Pay: version + "/userProject/pay", //支付宝支付
   OpenApp: version + "/app/openApp", //打开app
   AllApp: version + "/app/allApp", //所有下载app
-  AppAdd: version + "/app/appAdd", //添加下载记录
-  SelectApp: version + "/app/selectApp" //查询用户所下载app
+  AppAdd: version + "/appDownload/appAdd", //添加下载记录
+  SelectApp: version + "/appDownload/selectApp" //查询用户所下载app
 };
 export default api;
