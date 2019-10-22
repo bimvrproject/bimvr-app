@@ -228,7 +228,7 @@ export default {
           if (response.data == null) {
             mythis.openNotification();
           }
-          if (response.data.type == 1) {
+          if (response.data.type!=null && response.data.type == 1) {
             window.location.href = response.data.visitUrl;
             mythis.disabled = true;
             var type = response.data.type;
@@ -239,7 +239,6 @@ export default {
         })
         .catch(function(error) {
           console.log(error);
-          alert("该模型没有本地程序");
         });
     },
 
@@ -261,7 +260,7 @@ export default {
           if (response.data == null) {
             mythis.openNotification();
           }
-          if (response.data.type == 2) {
+          if (response.data.type!=null && response.data.type == 2) {
             window.location.href = response.data.visitUrl;
             mythis.disabled = true;
             var type = response.data.type;
@@ -272,7 +271,6 @@ export default {
         })
         .catch(function(error) {
           console.log(error);
-          alert("该模型没有本地程序");
         });
     },
     //      openApp(scheme) {
